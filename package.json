@@ -1,0 +1,23 @@
+{
+  "name": "Jet",
+  "version": "0.1.1",
+  "description": "A light, semantic, responsive, CSS framework built mostly from jeet.",
+  "keywords": [
+    "css",
+    "jeet",
+    "stylus",
+    "framework"
+  ],
+  "homepage": "http://jeetframework.com/",
+  "bin": "jet.js",
+  "main": "jet.js",
+  "dependencies": {
+    "commander": "~1.1.1",
+    "color-terminal": "~0.0.3",
+    "github-download": "~0.2.0",
+    "stylus": "~0.32.1",
+    "nib": "~0.9.1",
+    "compass": "~0.1.0",
+    "tiny-lr": "~0.0.4"
+  }
+}
