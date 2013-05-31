@@ -4,11 +4,11 @@ var app = require('commander');
 var terminal = require('color-terminal');
 var download = require('github-download');
 var fs = require('fs');
+var util = require('util');
 var http = require('http');
 var net = require('net');
 var stylus = require('stylus');
 var nib = require('nib');
-var compass = require('compass');
 var tinylr = require('tiny-lr');
 
 
@@ -16,18 +16,18 @@ var livereload = false;
 app.version('0.1.1');
 
 app.command('create <app_name>').description("Create a new Jet app").action(function(app_name) {
-	terminal.colorize("\n%W%0%UCreating " + app_name + "%n\n");
-	terminal.write("    Downloading Repo ... ");
-	download({user: 'Sawboo', repo: 'Jet'}, process.cwd() + "/." + app_name)
-		.on('error', function(err){
-			terminal.color("red").write(err).reset().write("\n\n");
-			process.kill();
-		})
-		.on('end', function(){
-			fs.renameSync(process.cwd() + "/." + app_name + "/web",  process.cwd() + "/" + app_name);
-			deleteFolder(process.cwd() + "/." + app_name);
-			terminal.color("green").write("OK!").reset().write("\n\n");
-		});
+    terminal.colorize("\n%W%0%UCreating " + app_name + "%n\n");
+    terminal.write("    Downloading Repo ... ");
+    download({user: 'Sawboo', repo: 'Jet'}, process.cwd() + "/." + app_name)
+        .on('error', function(err){
+            terminal.color("red").write(err).reset().write("\n\n");
+            process.kill();
+        })
+        .on('end', function(){
+            fs.renameSync(process.cwd() + "/." + app_name + "/www",  process.cwd() + "/" + app_name);
+            deleteFolder(process.cwd() + "/." + app_name);
+            terminal.color("green").write("OK!").reset().write("\n\n");
+        });
 });
 
 app.command('watch').description("Watch the current path and recompile CSS on changes").action(function(){
@@ -35,16 +35,15 @@ app.command('watch').description("Watch the current path and recompile CSS on ch
 	cssPath = rootPath + "css/";
 	terminal.colorize("\n%W%0%UWatching App%n\n\n");
 	compileStylus(cssPath);
-	startLiveReload(cssPath)
+	startLiveReload(cssPath);
 	fs.watch(rootPath, function(e, filename) {
 		var ext = filename.substr(-4);
-		//if (ext === "html" || ext === ".css")
 		if (livereload && ext !== ".git") {
 			http.get("http://localhost:35729/changed?files=" + filename);
 		}
 	});
 
-	if (fs.existsSync(cssPath + "styl") && !app.scss) {
+	if (fs.existsSync(cssPath + "styl")) {
 		var stylFilesArr = fs.readdirSync(cssPath + "styl");
 		for (var i = 0; i < stylFilesArr.length; i++) {
 			if (fs.statSync(cssPath + "styl/" + stylFilesArr[i]).isDirectory() && stylFilesArr[i].substr(-4, 1) !== ".") {
@@ -70,21 +69,21 @@ app.parse(process.argv);
 
 //Function by timoxley on https://gist.github.com/timoxley/1689041
 function isPortTaken (PORT, callback) {
-  var tester = net.createServer()
+  var tester = net.createServer();
   tester.once('error', function (err) {
     if (err.code == 'EADDRINUSE') {
-      callback(null, true)
+      callback(null, true);
     } else {
-      callback(err)
+      callback(err);
     }
-  })
+  });
   tester.once('listening', function() {
     tester.once('close', function() {
-      callback(null, false)
-    })
-    tester.close()
-  })
-  tester.listen(PORT)
+      callback(null, false);
+    });
+    tester.close();
+  });
+  tester.listen(PORT);
 }
 
 function startLiveReload() {
@@ -107,11 +106,11 @@ function startLiveReload() {
 
 function getRootPath () {
 	var rootPath = process.cwd();
-	if (fs.existsSync(rootPath + "/styl") {
+	if (fs.existsSync(rootPath + "/styl")) {
 		rootPath = rootPath.substr(0, rootPath.length - 3);
-	} else if (fs.existsSync(rootPath + "/css/styl") {
+	} else if (fs.existsSync(rootPath + "/css/styl")) {
 		rootPath += "/";
-	} else if (fs.existsSync(rootPath + "/www/css/styl") {
+	} else if (fs.existsSync(rootPath + "/www/css/styl")) {
 		rootPath += "/www/";
 	} else {
 		terminal.color("red").write("This doesn't appear to be a Jet Project").reset().write("\n\n");
@@ -137,7 +136,7 @@ function compileStylus (cssPath) {
 		styleFile = stylus(styleFile.toString()).set('paths', [cssPath + "styl"]).set('compress', true).use(nib()).render();
 		terminal.color("green").write("OK!").reset().write("\n");
 
-		terminal.write("    Saving Compiled Stylus ... ");
+		terminal.write("    Saving Compiled Stylus... ");
 		fs.writeFileSync(cssPath + "styl/style.css", styleFile);
 		terminal.color("green").write("OK!").reset().write("\n\n");
 		if (livereload) {
@@ -165,4 +164,4 @@ function deleteFolder(path) {
         });
         fs.rmdirSync(path);
     }
-};
+}
