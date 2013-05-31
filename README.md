@@ -1,25 +1,30 @@
-Jeet Framework
+Jet Framework
+====
 
-Website/Docs: http://jeetframework.com/
+Paying Homage
+----
 
-Github: https://github.com/CorySimmons/jeet
+This project was originally developed by Cory Simmons as the Jeet framework. I have modified his work and stripped a few things out to streamline things even further to my liking. Jet uses stylus as the css preprocessor rather than using a mix of both compass and stylus like Jeet.
+
+###Original Jeet project:
+
+    http://jeetframework.com/
+
+    https://github.com/CorySimmons/jeet
 
 Installation:
+----
 
-Install Compass and NodeJS, then open Terminal or Command Prompt and:
+Install NodeJS, then open Terminal or Command Prompt and:
 
-npm install jeet
-jeet -h
+    npm install -g jet
 
-
-Usage: jeet [options] [command]
+Usage: ```jet [options] [command]```
 
 Commands:
-    create <app_name>      Create a new Jeet app
-    watch                  Watch the current path and recompile CSS on changes
+    ```create <app_name>```      Create a new Jeet app
+    ```watch```                  Watch the current path and recompile CSS on changes
 
 Options:
-    -h, --help     output usage information
-    -V, --version  output the version number
-    -t, --stylus   Only use Stylus
-    -c, --scss     Only use SCSS
+    ```-h, --help```     output usage information
+    ```-V, --version```  output the version number
