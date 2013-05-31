@@ -8,9 +8,9 @@ This project was originally developed by Cory Simmons as the Jeet framework. I h
 
 ###Original Jeet project:
 
-    http://jeetframework.com/
+```http://jeetframework.com/```
 
-    https://github.com/CorySimmons/jeet
+```https://github.com/CorySimmons/jeet```
 
 Installation:
 ----
@@ -22,9 +22,13 @@ Install NodeJS, then open Terminal or Command Prompt and:
 Usage: ```jet [options] [command]```
 
 Commands:
-    ```create <app_name>```      Create a new Jeet app
+
+    ```create <app_name>```      Create a new Jet app
+
     ```watch```                  Watch the current path and recompile CSS on changes
 
 Options:
+
     ```-h, --help```     output usage information
+
     ```-V, --version```  output the version number
