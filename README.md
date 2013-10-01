@@ -1,12 +1,10 @@
-Jet Framework
+Jett Framework
 ====
-
-
 
 Paying Homage
 ----
 
-This project was originally developed by Cory Simmons as the Jeet framework. I have modified his work and stripped a few things out to streamline things even further to my liking. Jet uses stylus as the css preprocessor rather than using a mix of both compass and stylus like Jeet.
+This project was originally developed by Cory Simmons as the Jeet framework. I have modified his work and stripped a few things out to streamline things even further to my liking. Jett uses stylus as the css preprocessor rather than using a mix of both compass and stylus like Jeet.
 
 ###Original Jeet project:
 
@@ -19,13 +17,13 @@ Installation:
 
 Install NodeJS, then open Terminal or Command Prompt and run:
 
-    npm install -g jet
+    npm install -g jett
 
-Usage: ``jet [options] [command]``
+Usage: ``jett [options] [command]``
 
 Commands:
 
-``create <app_name>``      Create a new Jet app
+``create <app_name>``      Create a new Jett app
 
 ``watch``                  Watch the current path and recompile CSS on changes
 
